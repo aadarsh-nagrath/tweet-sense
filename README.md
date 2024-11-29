@@ -14,12 +14,15 @@ TweetSense is a browser extension designed to enhance your Twitter experience by
    ```bash
    git clone https://github.com/aadarsh-nagrath/tweet-sense.git
    ```
-2. Open your browser and navigate to the extensions page:
+   NOTE -
+   https://github.com/aadarsh-nagrath/tweet-sense/blob/cba2a56089697dc1707022bf5451d7bfc5cc5853/popup.js#L28
+   Add your own llm model rest endpoint here, i prefer the Gemini rest endpoint with api_key in it
+3. Open your browser and navigate to the extensions page:
    - For Chrome: `chrome://extensions`
    - For Edge: `edge://extensions`
-3. Enable **Developer Mode**.
-4. Click **Load unpacked** and select the cloned `tweet-sense` directory.
-5. The extension will now be added to your browser.
+4. Enable **Developer Mode**.
+5. Click **Load unpacked** and select the cloned `tweet-sense` directory.
+6. The extension will now be added to your browser.
 
 ## Usage
 
