@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "Twitter Reply Assistant",
+    "version": "1.0",
+    "description": "Automatically generate replies to tweets using AI.",
+    "permissions": ["activeTab", "scripting", "storage"],
+    "host_permissions": ["https://x.com/*"],
+    "content_scripts": [
+      {
+        "matches": ["https://x.com/*"],
+        "js": ["content.js"]
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "icon.png"
+    }
+}
