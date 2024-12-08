@@ -48,11 +48,26 @@
   <h1>Twitter Reply Assistant</h1>
   <div>
     <textarea id="tweetText" placeholder="Enter or paste a tweet"></textarea>
+  
+    <div>
+      <input
+        id="tagInput"
+        type="text"
+        placeholder="Enter a tag and press Enter (e.g., witty)"
+        style="width: 100%; margin-bottom: 10px; padding: 10px; border-radius: 5px;"
+      />
+      <div id="tagDisplay" style="margin-bottom: 10px; font-size: 14px;">
+        <!-- Tags will be displayed here -->
+      </div>
+    </div>
+  
     <button id="fetchButton">Generate Reply</button>
+  
     <div id="replySection" style="display: none;">
       <p>Generated Reply:</p>
-      <p id="generatedReply"></p>
+      <p id="generatedReply" class="response"></p>
     </div>
-  </div>  
+  </div>
+  
 </body>
 </html>
