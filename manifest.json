@@ -5,6 +5,9 @@
     "description": "Automatically generate replies to tweets using AI.",
     "permissions": ["activeTab", "scripting", "storage"],
     "host_permissions": ["https://x.com/*"],
+    "background": {
+      "service_worker": "background.js"
+    },
     "content_scripts": [
       {
         "matches": ["https://x.com/*"],

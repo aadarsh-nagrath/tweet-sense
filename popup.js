@@ -1,3 +1,14 @@
+chrome.runtime.sendMessage({ action: "getActiveTweet" }, (response) => {
+  const tweetContainer = document.getElementById("tweet-container");
+  if (response && response.tweet) {
+    console.log("Received tweet in popup:", response.tweet);  // Debug log
+    tweetText.innerHTML = `${response.tweet}`;
+  } else {
+    console.log("No tweet found in background.");  // Debug log
+    tweetContainer.innerHTML = `<p>No active tweet detected.</p>`;
+  }
+});
+
 document.getElementById("fetchButton").addEventListener("click", () => {
     console.log("Button clicked");
   

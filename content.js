@@ -1,31 +1,33 @@
-// Listen for clicks to detect tweets
-document.addEventListener("click", (event) => {
-    const tweetElement = event.target.closest('[data-testid="tweet"]');
+(() => {
+  function getActiveTweet() {
+    const tweetElement = document.querySelector('div[data-testid="tweetText"]');
+
     if (tweetElement) {
-      const tweetTextElement = tweetElement.querySelector('[lang]');
-      if (tweetTextElement) {
-        const tweetText = tweetTextElement.innerText;
-  
-        console.log("Detected tweet text:", tweetText);
-  
-        chrome.runtime.sendMessage({ action: "fetchReply", tweetText });
-      } else {
-        console.error("Tweet text element not found.");
+        return tweetElement.textContent.trim();
+    } else {
+        return null;
+    }
+  }
+
+  function tryGetTweet() {
+    const activeTweet = getActiveTweet();
+    if (activeTweet) {
+      try {
+        chrome.runtime.sendMessage({
+            action: "setActiveTweet",
+            tweet: activeTweet
+        }, (response) => {
+            if (chrome.runtime.lastError) {
+                console.error("Error sending message:", chrome.runtime.lastError);
+            }
+        });
+      } catch (error) {
+        console.error("Error in message sending:", error);
       }
     }
-  });
-  
-  // Listen for messages from the background script to display the reply
-  chrome.runtime.onMessage.addListener((message) => {
-    if (message.action === "displayReply") {
-      console.log("Received reply:", message.reply);
-  
-      const replyBox = document.querySelector('[data-testid="tweetTextarea_0"]');
-      if (replyBox) {
-        replyBox.value = message.reply; // Pre-fill the reply box
-      } else {
-        console.error("Reply box not found.");
-      }
-    }
-  });
-  
+    setTimeout(tryGetTweet, 1000); // Retry every second
+  }
+
+  // Initialize the script
+  tryGetTweet();
+})();
