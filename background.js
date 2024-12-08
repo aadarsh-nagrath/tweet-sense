@@ -13,3 +13,30 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ tweet: activeTweet });
   }
 });
+
+chrome.webNavigation.onCompleted.addListener(({ tabId, frameId }) => {
+    if (frameId === 0) { // Ensure this is the top frame
+      chrome.scripting.executeScript({
+        target: { tabId },
+        files: ["content.js"]
+      });
+    }
+  }, { url: [{ hostSuffix: "x.com" }] });
+
+  
+  chrome.action.onClicked.addListener(async (tab) => {
+    if (tab.url.includes("x.com")) {
+      // Reload the page
+      chrome.tabs.reload(tab.id, {}, () => {
+        console.log("Page reloaded.");
+        // Reinject content script after reload
+        chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          files: ["content.js"]
+        });
+      });
+    } else {
+      console.log("This extension works only on x.com.");
+    }
+  });
+  

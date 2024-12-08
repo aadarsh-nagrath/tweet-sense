@@ -1,21 +1,24 @@
 {
-    "manifest_version": 3,
-    "name": "Twitter Reply Assistant",
-    "version": "1.0",
-    "description": "Automatically generate replies to tweets using AI.",
-    "permissions": ["activeTab", "scripting", "storage"],
-    "host_permissions": ["https://x.com/*"],
-    "background": {
+  "manifest_version": 3,
+  "name": "Twitter Reply Assistant",
+  "version": "1.0",
+  "description": "Automatically generate replies to tweets using AI.",
+  "permissions": ["activeTab", "scripting", "storage", "webNavigation"],
+  "host_permissions": ["https://x.com/*"],
+  "background": {
       "service_worker": "background.js"
-    },
-    "content_scripts": [
+  },
+  "content_scripts": [
       {
-        "matches": ["https://x.com/*"],
-        "js": ["content.js"]
+          "matches": ["https://x.com/*"],
+          "js": ["content.js"]
       }
-    ],
-    "action": {
+  ],
+  "action": {
       "default_popup": "popup.html",
       "default_icon": "icon.png"
-    }
+  },
+  "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'"
+  }
 }

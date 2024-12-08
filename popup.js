@@ -5,7 +5,6 @@ chrome.runtime.sendMessage({ action: "getActiveTweet" }, (response) => {
     tweetText.innerHTML = `${response.tweet}`;
   } else {
     console.log("No tweet found in background.");  // Debug log
-    tweetContainer.innerHTML = `<p>No active tweet detected.</p>`;
   }
 });
 
